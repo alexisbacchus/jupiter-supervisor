@@ -1,5 +1,6 @@
+#!/bin/python3
 import subprocess, json
-
+from colors import bcolors
 
 def get_listenports():
     bash_command = "./netcommand.sh"
@@ -24,7 +25,11 @@ for current_port in MODULES_DICT:
     if current_port in accessible_ports:
         accessible_modules[current_port] = MODULES_DICT[current_port]
     else :
-        print("NOT ALIVE : {}".format(MODULES_DICT[str(current_port)]))
+        print("{}NOT ALIVE : {}{}".format(
+            bcolors.FAIL,
+            MODULES_DICT[str(current_port)],
+            bcolors.ENDC
+            ))
 
 for key, value in accessible_modules.items():
-    print("OK : {} on port {}".format(value, key))
+    print("{}OK : {} on port {}{}".format(bcolors.OKGREEN,value, key,bcolors.ENDC))
